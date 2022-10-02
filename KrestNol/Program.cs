@@ -11,13 +11,52 @@ namespace KrestNol
 
         private static void Consol(string[] a)
         {
+            Console.Clear();
+            Console.ResetColor();
             Console.WriteLine($"-------------");
-            Console.WriteLine($"| {a[0]} | {a[1]} | {a[2]} |");
+            Console.Write($"|");
+            for (int i = 0; i < 3; i++)
+            {
+                if (a[i] == "X")
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                else if (a[i] == "O")
+                    Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($" {a[i]} ");
+                Console.ResetColor();
+                Console.Write($"|");
+            }
+            Console.ResetColor();
+            Console.WriteLine();
             Console.WriteLine($"-------------");
-            Console.WriteLine($"| {a[3]} | {a[4]} | {a[5]} |");
+            Console.Write($"|");
+            for (int i = 3; i < 6; i++)
+            {
+                if (a[i] == "X")
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                else if (a[i] == "O")
+                    Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($" {a[i]} ");
+                Console.ResetColor();
+                Console.Write($"|");
+            }
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine($"-------------"); 
+            Console.Write($"|");
+            for (int i = 6; i < 9; i++)
+            {
+                if (a[i] == "X")
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                else if (a[i] == "O")
+                    Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($" {a[i]} ");
+                Console.ResetColor();
+                Console.Write($"|");
+            }
+            Console.ResetColor();
+            Console.WriteLine();
             Console.WriteLine($"-------------");
-            Console.WriteLine($"| {a[6]} | {a[7]} | {a[8]} |");
-            Console.WriteLine($"-------------");
+            Console.ResetColor();
         }
 
         private static bool CheckInput(string a, string[] array)
@@ -78,6 +117,7 @@ namespace KrestNol
         {
             string[] array = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             Consol(array);
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Кто будет Х (1/2)?: ");
             var pl = Console.ReadLine();
             string player1;
@@ -95,6 +135,7 @@ namespace KrestNol
             Console.WriteLine("(ввод хода: координата на доске, число от 1 до 9)");
             Consol(array);
 
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Игрок 1: ");
             var move1 = Console.ReadLine();
             while (!CheckInput(move1, array))
@@ -107,6 +148,7 @@ namespace KrestNol
 
             while (!Fullness(array))
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Игрок 2: ");
                 var move2 = Console.ReadLine();
                 while (!CheckInput(move2, array))
@@ -118,10 +160,13 @@ namespace KrestNol
                 Consol(array);
                 if (WinCobination(player2, array))
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Поздравляем! Игрок 2 победил!");
+                    Console.ResetColor();
                     break;
                 }
 
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write("Игрок 1: ");
                 move1 = Console.ReadLine();
                 while (!CheckInput(move1, array))
@@ -130,10 +175,14 @@ namespace KrestNol
                     move1 = Console.ReadLine();
                 }
                 array[int.Parse(move1) - 1] = player1;
+
+                Console.ForegroundColor = ConsoleColor.Green;
                 Consol(array);
                 if (WinCobination(player1, array))
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("Поздравляем! Игрок 1 победил!");
+                    Console.ResetColor();
                     break;
                 }
             }
