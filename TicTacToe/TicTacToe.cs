@@ -67,11 +67,9 @@ namespace TicTacToe
             int flag = 0;
 
             for (int i = 0; i < board.Length; i++)
-            {
                 if (board[i] == GameSign.Crosses |
                     board[i] == GameSign.Noughts)
                     flag++;
-            }
             if (flag == 9)
                 isDraw = true;
             return isDraw;
